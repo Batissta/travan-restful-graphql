@@ -1,0 +1,66 @@
+GET http://localhost:2005/api/usuarios
+
+###
+
+POST http://localhost:2005/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Toreto",
+  "email": "plataoa@gmail.com",
+  "senha": "1234",
+  "tipo": "motorista",
+  "veiculo": {
+    "ano": 2024,
+    "cor": "Branco",
+    "marca": "Volkswagem",
+    "modelo": "Jetta",
+    "placa": "OB4LUNZ"
+  }
+}
+### 
+POST http://localhost:2005/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Tolleto",
+  "email": "platao4a@gmail.com",
+  "senha": "1234",
+  "tipo": "motorista",
+  "veiculo": {
+    "ano": 2024,
+    "cor": "Branco",
+    "marca": "Volkswagem",
+    "modelo": "Jetta",
+    "placa": "OB4LUNZ"
+  }
+}
+### 
+
+POST http://localhost:2005/api/usuarios
+Content-Type: application/json
+
+{
+  "nome": "Lula",
+  "email": "romaanel@gmail.com",
+  "senha": "bara",
+  "tipo": "passageiro"
+}
+
+### 
+
+GET http://localhost:2005/api/usuarios/tipo/motoristas
+###
+
+GET http://localhost:2005/api/usuarios/tipo/passageiros
+###
+
+###
+
+POST http://localhost:2005/api/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "romanel@gmail.com",
+  "senha": "1234"
+}
