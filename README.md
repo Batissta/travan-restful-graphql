@@ -1,8 +1,13 @@
-# 🔒 API Express + Zod + Mongoose + Typescript + JWT
+
+<div align="center">
+
+# 🔒 API Travan!<br>Express + Zod + GraphQL + Mongoose + Typescript + JWT
+
+</div>
 
 <div align="center">
   
-Esta é uma API desenvolvida para estudos, utilizando TypeScript, Mongoose, dotenv, Zod, Bcrypt, Jsonwebtoken e futuramente adicionarei mais tecnologias. A API gerencia essas entidades principais: `Usuarios`, `Motoristas`, `Avaliações` e `Viagens`.
+Esta é uma API desenvolvida para estudos, utilizando TypeScript, Mongoose, dotenv, Zod, Bcrypt, GraphQL, Jsonwebtoken e futuramente, mais tecnologias. A API gerencia essas principais entidades: `Usuarios`, `Motoristas`, `Avaliações` e `Viagens`.
 
 
 ![Zod](https://img.shields.io/badge/Zod-000000?style=for-the-badge&logo=Zod)
@@ -28,17 +33,40 @@ Esta é uma API desenvolvida para estudos, utilizando TypeScript, Mongoose, dote
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-## ✍🏻 Autor
+## 👨🏼‍💻 Equipe de desenvolvedores
+<table align=center>
+    <td align="center" width="180">
+        <img src="https://avatars.githubusercontent.com/u/140225853?v=4?width=192" width="100"><br>
+        <b>Francinaldo Batista</b>
+        <br>
+        <a href="https://linkedin.com/in/francinaldobatista">LinkedIn ➯</a>
+    </td>
+    <td align="center" width="180">
+        <img src="https://avatars.githubusercontent.com/u/132765451?v=4?width=192" width="100"><br>
+        <b>Talles Oliveira</b>
+        <br>
+        <a href="https://www.linkedin.com/in/talles-oliveira-98976827b/">LinkedIn ➯</a>
+    </td>
+    <td align="center" width="180">
+        <img src="https://avatars.githubusercontent.com/u/134446830?v=4?width=192" width="100"><br>
+        <b>Pablo Selares</b>
+        <br>
+        <a href="https://www.linkedin.com/in/pablo-selares-274424278/">LinkedIn ➯</a>
+    </td>
+    <td align="center" width="180">
+        <img src="https://avatars.githubusercontent.com/u/142511788?v=4?width=192" width="100"><br>
+        <b>Gabryell Leal</b>
+        <br>
+        <a href="https://www.linkedin.com/in/gabryell-leal-rocha-1762392a0/">LinkedIn ➯</a>
+    </td>
+    <td align="center" width="180">
+        <img src="https://avatars.githubusercontent.com/u/186224768?v=4?width=192" width="100"><br>
+        <b>Eduardo Sena</b>
+        <br>
+        <a href="https://github.com/EduardoSenaRibeiro">LinkedIn ➯</a>
+    </td>
+</table>
 
-<a><img src="https://gitlab.com/uploads/-/system/user/avatar/23003426/avatar.png" width="200"></a><br><br>
-
-Olá, Sou **Francinaldo Batista** <br>
-
-📍 **Localidade:** Campina Grande, Paraíba<br>
-🎓 **Formação:** Sistemas de informação - UniFacisa, 4° Semestre<br>
-
-Me encontre no **LinkedIn:**<br>
-<a href="https://www.linkedin.com/in/francinaldobatista"><img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin" width="100"></a>
 
 ## 🤔 Como rodar o código?
 ### Pré-requisitos
