@@ -1,4 +1,4 @@
-
+![](https://github.com/Batissta/travan-restful-graphql/blob/main/assets/7.png)
 <div align="center">
 
 # 🔒 API Travan!<br>Express + Zod + GraphQL + Mongoose + Typescript + JWT
