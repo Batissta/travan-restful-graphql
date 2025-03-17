@@ -63,7 +63,7 @@ Esta é uma API desenvolvida para estudos, utilizando TypeScript, Mongoose, dote
         <img src="https://avatars.githubusercontent.com/u/186224768?v=4?width=192" width="100"><br>
         <b>Eduardo Sena</b>
         <br>
-        <a href="https://github.com/EduardoSenaRibeiro">LinkedIn ➯</a>
+        <a href="https://www.linkedin.com/in/eduardo-sena-991250281/">LinkedIn ➯</a>
     </td>
 </table>
 
