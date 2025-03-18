@@ -2,12 +2,16 @@ GET http://localhost:2005/api/usuarios
 
 ###
 
+GET http://localhost:2005/api/usuarios/u.acf960a0-fa03-42eb-aaa2-ef32e3e849d6
+
+###
+
 POST http://localhost:2005/api/usuarios
 Content-Type: application/json
 
 {
   "nome": "Toreto",
-  "email": "plataoa@gmail.com",
+  "email": "socratess@gmail.com",
   "senha": "1234",
   "tipo": "motorista",
   "veiculo": {
@@ -15,7 +19,7 @@ Content-Type: application/json
     "cor": "Branco",
     "marca": "Volkswagem",
     "modelo": "Jetta",
-    "placa": "OB4LUNZ"
+    "placa": "OB4LPNO"
   }
 }
 ### 

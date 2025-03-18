@@ -6,7 +6,7 @@ POST http://localhost:2005/api/viagens
 Content-Type: application/json
 
 {
-  "motoristaId": "u.c0eebefd-3aa3-49cf-9ceb-4753d09c85e2",
+  "motoristaId": "u.acf960a0-fa03-42eb-aaa2-ef32e3e849d6",
   "data": "13-03-2005",
   "hora": {
     "horas": 12,

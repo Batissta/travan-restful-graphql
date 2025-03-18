@@ -2,62 +2,129 @@ import usuarioRepository from "../models/modelUsuario";
 import motoristaRepo from "../helpers/motoristaRepoMethods";
 import viagemRepository from "../models/modelViagem";
 import { randomUUID } from "node:crypto";
-import { validateCriarViagem } from "../validations/viagemZod";
+import {
+  validateCriarViagem,
+  validateAtualizarViagem,
+} from "../validations/viagemZod";
 
-export const findViagens = async (req: any, res: any) => {
+export const mutationCreateViagem = async (args: any) => {
   try {
-    const viagens = await viagemRepository.find();
-    return res.status(200).json({
-      quantidade: viagens.length,
-      viagens,
-    });
-  } catch (error: unknown) {
-    if (error instanceof Error)
-      return res.status(400).json({
-        message: error.message,
-      });
-  }
-};
-
-export const createViagem = async (req: any, res: any) => {
-  try {
-    const result = validateCriarViagem(req.body);
+    const result = validateCriarViagem(args);
     if (!result.success)
-      return res.status(400).json({
-        errors: result.errors,
-      });
+      return {
+        viagem: {},
+        error: "Dados inválidos!",
+        details: result.errors,
+      };
 
     const id = `v.${randomUUID()}`;
-
-    const novaViagem = await viagemRepository.create({
-      id,
-      ...result.data,
-    });
 
     if (result.data.motoristaId) {
       const motorista = await usuarioRepository.findOne({
         id: result.data.motoristaId,
       });
+
       if (!motorista?.nome)
-        return res.status(404).json({
-          message: "O motorista não foi encontrado!",
-        });
+        return {
+          viagem: "",
+          errors: "Motorista invalido!",
+          details: ["Erro 404. Motorista não encontrado!"],
+        };
       motorista.viagensId.push(id);
       await motorista.save();
     }
-
-    if (!novaViagem.data)
-      throw new Error("Um erro ocorreu na validação dos dados.");
-
-    return res.status(201).json({
-      message: "Viagem criada com sucesso!",
-      viagem: novaViagem,
+    const novaViagem = await viagemRepository.create({
+      id,
+      ...result.data,
     });
+
+    return {
+      viagem: novaViagem,
+      errors: "",
+      details: [],
+    };
   } catch (error: unknown) {
     if (error instanceof Error)
-      return res.status(400).json({
-        message: error.message,
+      return {
+        viagem: {},
+        errors: error.message,
+        details: [],
+      };
+  }
+};
+
+export const mutationUpdateById = async (id: string, args: any) => {
+  const payload = {
+    id,
+    ...args,
+  };
+  const validationResult = validateAtualizarViagem(payload);
+  if (!validationResult.success) {
+    return {
+      error: "Dados inválidos!",
+      viagem: null,
+      details: validationResult.errors,
+    };
+  }
+
+  if (validationResult.data.passageiroId) {
+    const passageiro = await usuarioRepository.findOne({
+      id: validationResult.data.passageiroId,
+    });
+    if (!passageiro?.nome)
+      return {
+        viagem: null,
+        error: "Passageiro não encontrado!",
+        details: [],
+      };
+    passageiro?.viagensId.push(validationResult.data.id);
+    await passageiro?.save();
+  }
+
+  if (validationResult.data.passageirosId) {
+    validationResult.data.passageirosId.forEach(async (p, i) => {
+      const passageiro = await usuarioRepository.findOne({
+        id: p,
       });
+      if (!passageiro?.nome)
+        return {
+          viagem: null,
+          error: `${i + 1}° passageiro não foi encontrado!`,
+          details: [],
+        };
+      passageiro?.viagensId.push(validationResult.data.id);
+      await passageiro?.save();
+    });
+  }
+
+  const updatedViagem = await viagemRepository.findOneAndUpdate(
+    { id: validationResult.data.id },
+    {
+      $set: { ...validationResult.data },
+      $push: {
+        ...(validationResult.data.passageiroId && {
+          passageirosId: validationResult.data.passageiroId,
+        }),
+      },
+    },
+    { new: true }
+  );
+
+  if (!(updatedViagem && updatedViagem.origem))
+    return { error: "Viagem não encontrada!", viagem: null, details: [] };
+
+  return { error: "", viagem: updatedViagem, details: [] };
+};
+
+export const mutationDeleteById = async (id: string) => {
+  try {
+    const idValido = validateAtualizarViagem({ id });
+    if (!idValido.success) return "ID inválido.";
+    const viagem = await viagemRepository.findOneAndDelete({ id });
+    if (!viagem?.origem) return "Viagem não encontrada!";
+    return "Viagem deletada com sucesso!";
+  } catch (error: unknown) {
+    if (error instanceof Error) return error.message;
   }
 };
 
@@ -75,22 +142,14 @@ export const queryFindByMotoristaId = async (motoristaId: string) => {
   }
 };
 
-export const findAllViagens = async () => {
+export const queryFindAllViagens = async () => {
   return await viagemRepository.find();
 };
 
-export const updateById = async (
-  id: string,
-  motoristaId: string,
-  novoPassageiroId: string,
-  data: string,
-  hora: {
-    horas: number;
-    minutos: number;
-  },
-  origem: string,
-  destino: string,
-  status: string
-) => {
-  return await viagemRepository.findOneAndUpdate({ id }, {});
+export const queryFindViagemById = async (id: string) => {
+  const viagem = await viagemRepository.findOne({ id });
+  return {
+    viagem: viagem ? viagem : {},
+    error: viagem ? "" : "Viagem não encontrada!",
+  };
 };
